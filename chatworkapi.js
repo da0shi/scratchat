@@ -1,18 +1,18 @@
 (function (global) {
   'use strict';
-  var chatwork = {
+  var chatworkapi = {
     API_TOKEN: 'PUT YOUR API HERE',
     HOST: 'https://api.chatwork.com/',
     VERSION: 'v1'
   };
-  chatwork.me = {
-      url: chatwork.HOST + chatwork.VERSION + '/me',
+  chatworkapi.me = {
+      url: chatworkapi.HOST + chatworkapi.VERSION + '/me',
       get: function () {
         $.ajax({
           url: this.url,
           type: 'GET',
           headers: {
-            'X-ChatwWorkToken': chatwork.API_TOKEN,
+            'X-ChatwWorkToken': chatworkapi.API_TOKEN,
             'Access-Control-Allow-Credentials': true
           },
           dataType: 'jsonp',
@@ -28,5 +28,5 @@
       }
     }
 
-  global.chatwork = chatwork;
+  global.chatworkapi = chatworkapi;
 })(this);
