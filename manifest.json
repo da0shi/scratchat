@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "name": "scratchat",
+  "description": "chatworkの痒い所をかくために",
+  "content_scripts": [
+    {
+      "matches": ["https://www.chatwork.com/*"],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "chatwork.js",
+        "main.js"
+      ]
+    }
+  ]
+}
