@@ -5,6 +5,7 @@
   "description": "chatworkの痒い所をかくために",
   "content_scripts": [
     {
+      "run_at": "document_end",
       "matches": ["https://www.chatwork.com/*"],
       "js": [
         "bower_components/jquery/dist/jquery.min.js",
@@ -12,5 +13,8 @@
         "main.js"
       ]
     }
+  ],
+  "web_accessible_resources": [
+        "bower_components/jquery/dist/jquery.min.map"
   ]
 }
