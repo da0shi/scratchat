@@ -3,14 +3,19 @@
   "manifest_version": 2,
   "name": "scratchat",
   "description": "chatworkの痒い所をかくために",
+  "icons": {
+    "16": "images/chatwork_icon16.png",
+    "48": "images/chatwork_icon48.png",
+    "128": "images/chatwork_icon128.png"
+  },
   "content_scripts": [
     {
       "run_at": "document_end",
       "matches": ["https://www.chatwork.com/*"],
       "js": [
         "bower_components/jquery/dist/jquery.min.js",
-        "chatwork.js",
-        "main.js"
+        "scripts/chatwork.js",
+        "scripts/main.js"
       ]
     }
   ],
