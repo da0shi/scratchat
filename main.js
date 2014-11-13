@@ -1,3 +1,7 @@
-(function (global) {
+(function ($, global, undefined) {
+  $(document).ready( function () {
   'use strict';
-}(this);
+    chatwork.initialize();
+    console.log(chatwork);
+  });
+})(jQuery, this);
