@@ -12,17 +12,17 @@
     dynamicStyle.style = style;
   };
   dynamicStyle.insert = function (selector, rules, index) {
-    if ('insertRule' in this.style.sheet) {
+    if ('insertRule' in dynamicStyle.style.sheet) {
       dynamicStyle.style.sheet.insertRule(selector +'{'+ rules +'}', index);
-    } else if ('addRule' in this.style.sheet) {
+    } else if ('addRule' in dynamicStyle.style.sheet) {
       dynamicStyle.style.sheet.addRule(selector, rules, index);
     }
   }
   dynamicStyle.remove = function (index) {
     if (index === undefined) return false;
-    if ('deleteRule' in this.style.sheet) {
+    if ('deleteRule' in dynamicStyle.style.sheet) {
       dynamicStyle.style.sheet.deleteRule(index);
-    } else if ('removeRule' in this.style.sheet) {
+    } else if ('removeRule' in dynamicStyle.style.sheet) {
       dynamicStyle.style.sheet.removeRule(index);
     }
     return true;
