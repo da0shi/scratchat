@@ -7,6 +7,7 @@
       rooms: {},
       users: {},
     },
+    myself: null,
     initialize: null
   };
 
@@ -22,6 +23,7 @@
     this.name = name;
     this.icon = icon;
     this.isGroup = isGroup;
+    this.isMychat = false;
   }
   var _chatlist = chatwork.chatlist;
 
@@ -35,6 +37,10 @@
       _chatlist.rooms[rid].isGroup = (icon.dataset.aid === undefined);
       if (! _chatlist.rooms[rid].isGroup) {
         _chatlist.users[rid] = new User (rid, icon.dataset.aid, name, icon.src);
+      }
+      if (name === 'My Chat') {
+        _chatlist.rooms[rid].isMychat = true;
+        chatwork.myself = _chatlist.users[rid];
       }
     });
   };
