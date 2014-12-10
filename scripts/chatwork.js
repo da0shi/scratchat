@@ -8,6 +8,7 @@
       users: {},
     },
     myself: null,
+    currentRoom: null,
     initialize: null
   };
 
@@ -35,6 +36,7 @@
       var name = item.getAttribute('aria-label');
       _chatlist.rooms[rid] = new Room(rid, name, icon.src);
       _chatlist.rooms[rid].isGroup = (icon.dataset.aid === undefined);
+      if (item.classList.contains('_roomSelected')) chatwork.currentRoom = rid;
       if (! _chatlist.rooms[rid].isGroup) {
         _chatlist.users[rid] = new User (rid, icon.dataset.aid, name, icon.src);
       }
@@ -56,10 +58,27 @@
     localStorage.setItem('chatwork.chatlist', _chatlist);
   }
 
+  chatwork.updateCurrentRoom = function (target) {
+    if (target.classList.contains('_roomSelected')) {
+      chatwork.currentRoom = target.dataset.rid;
+    }
+  };
+
   chatwork.initialize = function () {
     _chatlist.initialize();
     _chatlist.undefined;
   };
+
+  var observers = {};
+  observers.currentRoom = new MutationObserver(function (mutations) {
+    mutations.forEach(function(mutation){
+      chatwork.updateCurrentRoom(mutation.target);
+    })
+  }).observe(document.getElementById('_roomListItems'), {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['class']
+  });
 
   global.chatwork = chatwork;
 })(this);
