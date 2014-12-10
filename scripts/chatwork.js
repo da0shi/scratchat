@@ -28,8 +28,9 @@
   }
   var _chatlist = chatwork.chatlist;
 
-  _chatlist.update = function () {
+  _chatlist.initialize = function () {
     var $rooms = $('#_roomListItems li._room');
+    if (Object.keys(_chatlist.rooms).length === $rooms.length) return;
     Array.prototype.forEach.call($rooms, function (item) {
       var icon = $(item).find('img')[0];
       var rid = item.dataset.rid;
@@ -47,13 +48,6 @@
     });
   };
 
-  _chatlist.initialize = function () {
-    if (Object.keys(_chatlist.rooms).length === 0 ||
-       Object.keys(_chatlist.users).length === 0) {
-      _chatlist.update();
-    }
-  }
-
   _chatlist.save = function () {
     localStorage.setItem('chatwork.chatlist', _chatlist);
   }
@@ -65,8 +59,6 @@
   };
 
   chatwork.initialize = function () {
-    _chatlist.initialize();
-    _chatlist.undefined;
   };
 
   var observers = {};
@@ -79,6 +71,9 @@
     attributes: true,
     attributeFilter: ['class']
   });
+  observers.roomList = new MutationObserver(function (mutations) {
+      _chatlist.initialize();
+  }).observe(document.getElementById('_roomListItems'), {childList: true});
 
   global.chatwork = chatwork;
 })(this);
