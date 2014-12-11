@@ -18,60 +18,46 @@
     dynamicStyle.style = style;
   };
   dynamicStyle.insert = function (selector, rules) {
-    var index = dynamicStyle.style.sheet.cssRules.length;
-    if ('insertRule' in dynamicStyle.style.sheet) {
-      dynamicStyle.style.sheet.insertRule(selector +'{'+ rules +'}', index);
-    } else if ('addRule' in dynamicStyle.style.sheet) {
-      dynamicStyle.style.sheet.addRule(selector, rules, index);
+    var _sheet = dynamicStyle.style.sheet
+    var index = _sheet.cssRules.length;
+    if ('insertRule' in _sheet) {
+      _sheet.insertRule(selector +'{'+ rules +'}', index);
+    } else if ('addRule' in _sheet) {
+      _sheet.addRule(selector, rules, index);
     }
     return index;
   };
   dynamicStyle.remove = function (index) {
+    var _sheet = dynamicStyle.style.sheet
     if (index === undefined) return false;
-    if ('deleteRule' in dynamicStyle.style.sheet) {
-      dynamicStyle.style.sheet.deleteRule(index);
-    } else if ('removeRule' in dynamicStyle.style.sheet) {
-      dynamicStyle.style.sheet.removeRule(index);
+    if ('deleteRule' in _sheet) {
+      _sheet.deleteRule(index);
+    } else if ('removeRule' in _sheet) {
+      _sheet.removeRule(index);
     }
     return true;
   };
+  dynamicStyle.clean = function () {
+    var _sheet = dynamicStyle.style.sheet
+    for (var i = _sheet.cssRules.length; i > 0; i--) {
+      dynamicStyle.remove(i - 1);
+    }
+    _index.hideAll = -1;
+    _index.hideNotMention = -1;
+    _index.hideNotMine = -1;
+  };
   dynamicStyle.onlyMine = function () {
-    if (index.hideNotMention >= 0) {
-      dynamicStyle.remove(index.hideNotMention);
-      index.hideNotMention = -1;
-    }
-    if (index.hideNotMine < 0) {
-      index.hideNotMine = dynamicStyle.insert('div._message.chatTimeLineMessageMine', 'display: block;');
-    }
-    if (index.hideAll < 0) {
-      index.hideAll = dynamicStyle.insert('div._message', 'display:none');
-    }
+    dynamicStyle.clean();
+    _index.hideNotMine = dynamicStyle.insert('div._message.chatTimeLineMessageMine', 'display: block;');
+    _index.hideAll = dynamicStyle.insert('div._message', 'display:none');
   };
   dynamicStyle.onlyMention = function () {
-    if (index.hideNotMine >= 0) {
-      dynamicStyle.remove(index.hideNotMine);
-      index.hideNotMine = -1;
-    }
-    if (index.hideNotMention < 0) {
-      index.hideNotMention = dynamicStyle.insert('div._message.chatTimeLineMessageMention', 'display: block;');
-    }
-    if (index.hideAll < 0) {
-      index.hideAll = dynamicStyle.insert('div._message', 'display:none');
-    }
+    dynamicStyle.clean();
+    _index.hideNotMention = dynamicStyle.insert('div._message.chatTimeLineMessageMention', 'display: block;');
+    _index.hideAll = dynamicStyle.insert('div._message', 'display:none');
   };
   dynamicStyle.allMessages = function () {
-    if (index.hideAll >= 0) {
-      dynamicStyle.remove(index.hideAll);
-      index.hideAll = -1;
-    }
-    if (index.hideNotMention >= 0) {
-      dynamicStyle.remove(index.hideNotMention);
-      index.hideNotMention = -1;
-    }
-    if (index.hideNotMine >= 0) {
-      dynamicStyle.remove(index.hideNotMine);
-      index.hideNotMine = -1;
-    }
+    dynamicStyle.clean();
   };
   $(document).ready( function () {
     chatwork.initialize();
