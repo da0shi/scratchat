@@ -25,7 +25,7 @@
       dynamicStyle.style.sheet.addRule(selector, rules, index);
     }
     return index;
-  }
+  };
   dynamicStyle.remove = function (index) {
     if (index === undefined) return false;
     if ('deleteRule' in dynamicStyle.style.sheet) {
@@ -34,7 +34,7 @@
       dynamicStyle.style.sheet.removeRule(index);
     }
     return true;
-  }
+  };
   dynamicStyle.onlyMine = function () {
     if (index.hideNotMention >= 0) {
       dynamicStyle.remove(index.hideNotMention);
@@ -72,9 +72,8 @@
       dynamicStyle.remove(index.hideNotMine);
       index.hideNotMine = -1;
     }
-  }
+  };
   $(document).ready( function () {
-    'use strict';
     chatwork.initialize();
     dynamicStyle.initialize();
     console.log(chatwork);
