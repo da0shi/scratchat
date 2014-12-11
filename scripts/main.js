@@ -62,6 +62,7 @@
   $(document).ready( function () {
     chatwork.initialize();
     dynamicStyle.initialize();
+    var timeline = document.getElementById('_timeLine');
     console.log(chatwork);
     var switcher = document.createElement('select');
     switcher.id = "scrachat-switcher";
@@ -79,6 +80,7 @@
     switcher.addEventListener('change', function (event) {
       var fn = dynamicStyle[mswitch[event.target.selectedIndex].func];
       if (typeof fn === 'function') fn();
+      timeline.scrollTop = timeline.scrollHeight - timeline.offsetHeight;
     });
     var $chatSendTool = $('#_chatSendTool');
     $chatSendTool.append(switcher);
