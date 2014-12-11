@@ -63,5 +63,24 @@
     chatwork.initialize();
     dynamicStyle.initialize();
     console.log(chatwork);
+    var switcher = document.createElement('select');
+    switcher.id = "scrachat-switcher";
+    var mswitch = [
+      {func: 'allMessages', text:'All Messages'},
+      {func: 'onlyMine', text:'My Messages'},
+      {func: 'onlyMention', text:'Mentions'}
+    ];
+    Array.prototype.forEach.call(mswitch, function (elem, idx) {
+      var option = document.createElement('option');
+      option.value = idx;
+      option.innerText = elem.text;
+      switcher.appendChild(option);
+    });
+    switcher.addEventListener('change', function (event) {
+      var fn = dynamicStyle[mswitch[event.target.selectedIndex].func];
+      if (typeof fn === 'function') fn();
+    });
+    var $chatSendTool = $('#_chatSendTool');
+    $chatSendTool.append(switcher);
   });
 })(jQuery, this);
