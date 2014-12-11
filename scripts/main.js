@@ -1,11 +1,11 @@
 (function ($, global, undefined) {
   'use strict';
   var dynamicStyle = {
-    style: null
+    style: null,
     indexes: {
       hideAll: -1,
-      hideNotMention: -1
-      hideNotMine: -1,
+      hideNotMention: -1,
+      hideNotMine: -1
     }
   };
   var _index = dynamicStyle.indexes;
