@@ -14,12 +14,13 @@
       "matches": ["https://www.chatwork.com/*"],
       "js": [
         "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/lodash/lodash.min.js",
         "scripts/chatwork.js",
         "scripts/main.js"
       ]
     }
   ],
   "web_accessible_resources": [
-        "bower_components/jquery/dist/jquery.min.map"
+    "bower_components/jquery/dist/jquery.min.map"
   ]
 }

@@ -1,4 +1,4 @@
-(function ($, global, undefined) {
+(function (global, $, _, undefined) {
   'use strict';
   var dynamicStyle = {
     style: null,
@@ -85,4 +85,4 @@
     var $chatSendTool = $('#_chatSendTool');
     $chatSendTool.append(switcher);
   });
-})(jQuery, this);
+})(this, jQuery, _);

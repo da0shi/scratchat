@@ -1,4 +1,4 @@
-(function (global) {
+(function (global, $, _, undefined) {
   'use strict';
   var chatwork= {
     HOST: 'https://www.chatwork.com',
@@ -27,7 +27,7 @@
 
   _chatlist.update = function () {
     var $rooms = $('#_roomListItems li._room');
-    Array.prototype.forEach.call($rooms, function (item) {
+    _($rooms).forEach(function (item){
       var icon = $(item).find('img')[0];
       var rid = item.dataset.rid;
       var name = item.getAttribute('aria-label');
@@ -40,8 +40,8 @@
   };
 
   _chatlist.initialize = function () {
-    if (Object.keys(_chatlist.rooms).length === 0 ||
-       Object.keys(_chatlist.users).length === 0) {
+    if (_.keys(_chatlist.rooms).length === 0 ||
+       _.keys(_chatlist.users).length === 0) {
       _chatlist.update();
     }
   }
@@ -56,4 +56,4 @@
   };
 
   global.chatwork = chatwork;
-})(this);
+})(this, jQuery, _);
